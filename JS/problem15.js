@@ -1,8 +1,8 @@
 function isNUm(a) {
-    if( typeof Number (a) === "number") {
+    if( typeof a === "number") {
         return Number(a);
     }
-    else NaN;
+    else null;
 }
 let number = 'abc';
 console.log(isNUm(number));

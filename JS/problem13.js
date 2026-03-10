@@ -1,7 +1,7 @@
 let obj = {};
 function compare(a ,b) {
-    obj.equal = 2 == "2";
-    obj.triplEqual = 2==="2"; 
+    obj.equal = a == b;
+    obj.triplEqual = a==="b"; 
     return obj;   
 }
 

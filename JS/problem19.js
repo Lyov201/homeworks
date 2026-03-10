@@ -1,5 +1,5 @@
 function trueSum(a ,b) {
-    if (typeof a === typeof b ) {
+    if (typeof a === 'number' && typeof b === 'number') {
         return a + b;
     }
     else return "Ivalid Input"

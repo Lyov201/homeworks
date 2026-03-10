@@ -9,15 +9,15 @@ function exactType(a) {
     else if(typeof a === "string") {
         return console.log("string");
     }
+    else if (Array.isArray(a)) {
+        return console.log("array");
+    }
     else if(typeof a === "object"){
         return console.log("object");
     }
-    else if(Array.isArray(a)) {
-        return   console.log("array");
-    } 
     
 }
 let str = [1,2,3];
 let foo = function() {};
 let obj = {};
-exactType(foo);
+exactType(str);
