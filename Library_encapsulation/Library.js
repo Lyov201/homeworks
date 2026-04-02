@@ -191,7 +191,7 @@ class Library {
     }
 
     findBookByTitle(title) {
-        let book = this.#books.find(element => element.title === title);
+        let book = this.#books.find(element => element.matchesTitle());
         if(!book) {
             return null;
         }
