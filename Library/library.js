@@ -308,9 +308,11 @@ class Library{
     }
 
     showAllBooks() {
+        const allBooks = [];
         for(let i = 0; i<this.books.length; ++i){
-            console.log(this.books[i].getInfo());
+            allBooks = this.books[i].getInfo();
         }
+        return allBooks;
     }
 
     countBooks() {
