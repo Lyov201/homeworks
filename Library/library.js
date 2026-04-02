@@ -310,7 +310,7 @@ class Library{
     showAllBooks() {
         const allBooks = [];
         for(let i = 0; i<this.books.length; ++i){
-            allBooks = this.books[i].getInfo();
+            allBooks.push(this.books[i].getInfo());
         }
         return allBooks;
     }
@@ -359,7 +359,7 @@ library.addBook(book3);
 library.addBook(book4);
 
 console.log("=== All books ===");
-library.showAllBooks();
+console.log(library.showAllBooks());
 
 console.log("=== Count books ===");
 console.log(library.countBooks()); // 4
