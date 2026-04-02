@@ -118,7 +118,7 @@ class Reader {
                 return `The book is not available`;
             }
         } else{
-             throw new Error("Wron input")
+             return  "Wrong input"
         }
     }
 
@@ -127,7 +127,7 @@ class Reader {
             this.#borrowedBooks = this.#borrowedBooks.filter(b => b !== book);
             book.returnBook();
         } else {
-            throw new Error("You dont have that book");
+            return "You dont have that book";
         }
     }
 
@@ -148,13 +148,11 @@ class Reader {
 
 class Library {
     #name;
-    #books;
-    #readers;
+    #books = [];
+    #readers = [];
 
     constructor(name) {
         this.#name = name;
-        this.#books = [];
-        this.#readers = [];
     }
 
     get name() {
@@ -182,12 +180,12 @@ class Library {
             if(typeof book.year !== "number") throw new Error ("year must be a number");
 
             this.#books.push(book);
-        } else throw new Error("This is not book");
+        } else return "This is not book";
     }
 
     registerReader(reader){
         if(reader instanceof Reader) {
-            if(reader.name === "") throw new Error ("Reader must have a name");
+            if(reader.name === "") return;
             this.#readers.push(reader);
         } else throw new Error("This not a reader");
     }
@@ -202,18 +200,17 @@ class Library {
 
     findBooksByAuthor(authorName){
         let arr = this.#books.filter(b => b.author = authorName);
-        if(arr.length) return arr;
-        throw new Error("there is no book written by that author");
+        return arr;
     }
     giveBookToReader(title, reader) {
         const book = this.findBookByTitle(title);
-        if(!book) throw new Error("Book was not found");
+        if(!book) return "Book was not found";
         reader.takeBook(book);
     }
 
     acceptBookFromReader(title, reader){
         let book = this.findBookByTitle(title);
-        if(!book) throw new Error("Book was not found");
+        if(!book) return "Book was not found";
         reader. giveBackBook(book);
     }
 
