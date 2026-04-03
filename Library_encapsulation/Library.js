@@ -5,9 +5,9 @@ class Book {
     #isAvailable;
 
     constructor(title, author, year){
-        this.#title = title;
-        this.#author = author;
-        this.#year = year;
+        this.title = title;
+        this.author = author;
+        this.year = year;
         this.#isAvailable = true;
     }
 
@@ -38,7 +38,7 @@ class Book {
         return this.#year;
     }
     set year(value) {
-        if(value < 0) {
+        if(value <= 0) {
             throw new Error("Year must be a positive number");
         } else {
             this.#year = value;
@@ -87,7 +87,7 @@ class Reader {
     #borrowedBooks;
 
     constructor(name) {
-        this.#name = name;
+        this.name = name;
         this.#borrowedBooks = [];
     }
 
@@ -152,14 +152,14 @@ class Library {
     #readers = [];
 
     constructor(name) {
-        this.#name = name;
+        this.name = name;
     }
 
     get name() {
         return this.#name;
     }
     set name(value) {
-        if(value != "") {
+        if(value === "") {
             throw new Error("Name must not be empty");
         }
         else {
@@ -174,24 +174,27 @@ class Library {
     }
 
     addBook(book){
-        if(book instanceof Book){
-            if(book.title === "") throw new Error("Book must have title");
-            if(book.author === "") throw new Error("Book must have author name");
-            if(typeof book.year !== "number") throw new Error ("year must be a number");
+        if( !(book instanceof Book) ) return "This is not a book";
+        if(book.title === "") return"Book must have title";
+        if(book.author === "") return "Book must have author name";
+        if(typeof book.year !== "number") return "year must be a number";
 
-            this.#books.push(book);
-        } else return "This is not book";
+        this.#books.push(book);
     }
 
     registerReader(reader){
-        if(reader instanceof Reader) {
-            if(reader.name === "") return;
-            this.#readers.push(reader);
-        } else throw new Error("This not a reader");
+    if(!(reader instanceof Reader)) {
+        return "This is not a reader";
     }
 
+    if(reader.name === "") {
+        return "Reader must have name";
+    }
+
+    this.#readers.push(reader);
+}
     findBookByTitle(title) {
-        let book = this.#books.find(element => element.matchesTitle());
+        let book = this.#books.find(element => element.matchesTitle(title));
         if(!book) {
             return null;
         }
@@ -199,7 +202,7 @@ class Library {
     }
 
     findBooksByAuthor(authorName){
-        let arr = this.#books.filter(b => b.author = authorName);
+        let arr = this.#books.filter(b => b.author === authorName);
         return arr;
     }
     giveBookToReader(title, reader) {
@@ -215,9 +218,7 @@ class Library {
     }
 
     showAvailableBooks() {
-        if(this.#books.length) {
-            return this.#books.filter(b => b.isAvailable);
-        }
+        return this.#books.filter(b => b.isAvailable);
     }
 
     showAllBooks(){
